@@ -22,6 +22,7 @@ pub use errors::*;
 
 // Represents the possible types that passed in data may take on
 #[doc(hidden)]
+#[derive(Debug)]
 pub enum Data<'a> {
     String(string::String),
     Bool(bool),
@@ -105,18 +106,10 @@ impl<'a> PartialEq for Data<'a> {
     }
 }
 
-// Implementing custom Show for Data
-impl<'a> fmt::Debug for Data<'a> {
+// Implementing custom Show for Lambda
+impl <'a> fmt::Debug for Lambda<'a> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match *self {
-            Data::String(ref val) => write!(f, "String({:?})", val),
-            Data::Bool(val) => write!(f, "Boolean({:?})", val),
-            Data::Integer(ref val) => write!(f, "Integer({:?})", val),
-            Data::Float(ref val) => write!(f, "Float({:?})", val),
-            Data::Vector(ref val) => write!(f, "Vector({:?})", val),
-            Data::Hash(ref val) => write!(f, "Hash({:?})", val),
-            Data::Lambda(_) => write!(f, "Lambda(...)"),
-        }
+        write!(f, "Lambda(...)")
     }
 }
 
